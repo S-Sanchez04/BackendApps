@@ -23,7 +23,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         if (repository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("El correo ya está registrado.");
+            throw new EmailAlreadyExistsException(request.getEmail());
         }
         var user = User.builder()
                 .firstname(request.getFirstName())
